@@ -41,3 +41,11 @@ Thumbs.db
 
 # Temporary files
 *~
+
+# Bitrix core folders
+/bitrix/
+/upload/
+/_log/
+
+# Ansible
+*.retry

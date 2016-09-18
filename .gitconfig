@@ -3,7 +3,7 @@
     name = nikita.strelkov
 [core]
     editor = vim
-    excludesfile = ~/.gitignore
+	excludesfile = /home/nikita.strelkov/.gitignore
 [color "branch"]
     current = yellow reverse
     local = yellow
@@ -17,3 +17,4 @@
     added = yellow
     changed = green
     untracked = cyan
+    autocrlf = input
