@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+branch=$(git branch | grep '*' | sed 's/* //')
+file="$1"
+result=""
+
+# Read from commit file line by line:
+# 1)  IFS='' (or IFS=) prevents leading/trailing whitespace from being trimmed.
+# 2)  -r prevents backslash escapes from being interpreted.
+# 3)  || [[ -n $line ]] prevents the last line from being ignored if it doesn't end with a \n
+# (since read returns a non-zero exit code when it encounters EOF).
+while IFS='' read -r line || [[ -n "$line" ]]; do
+    result+="$line\n"
+done < "$file"
+
+# Add branch name only if it is not already in first line
+first_line=$(head -n 1 $file)
+if [[ $first_line != *"$branch"* ]]; then
+    result="$branch || $result"
+fi
+
+# write to commit file with
+# -e - for using '\n' for newline
+# -n - don't add newline in the end
+echo -ne "$result" > "$file"
