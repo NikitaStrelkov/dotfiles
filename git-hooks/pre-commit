@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# get list of staged files
+staged_files=$(git diff --cached --name-only)
+
+cmd='php-cs-fixer fix %s -q --level=symfony'
+if [ -f '.php_cs' ]; then
+    cmd='php-cs-fixer fix %s -q --config-file=.php_cs'
+fi
+
+fixed_files=()
+final_code=0 # exit code for all hook
+
+for staged in ${staged_files}; do
+
+    # apply php-cs-fixer only to EXISTING .PHP files
+    if [[ -f ${staged} && ${staged} == *.php ]]; then
+        # use php-cs-fixer and get exit code
+        eval '$(printf "$cmd" "$staged")'
+        exit_code=$?
+
+        # exit code === 1 means that file was fixed
+        # so we append it to array and change exit code for hook to 1
+        # to restrict commit
+        if [[ ${exit_code} -eq 1 ]]; then
+            fixed_files+=(${staged})
+            final_code=1
+        fi
+    fi
+done
+
+if [[ ${#fixed_files[@]} -gt  0  ]]; then
+    red='\033[01;31m' # bold red
+    no_color='\033[0m' # No Color
+
+    echo -e "\nSome files that you tried to commit were fixed by php-cs-fixer:\n"
+    for fixed in "${fixed_files[@]}"; do
+        echo -e "$fixed\n"
+    done
+    echo -e "Please check changes and use ${red}git add -p${no_color} to manually stage changes"
+fi
+
+exit ${exit_code}
