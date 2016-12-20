@@ -23,3 +23,4 @@ fi
 # -e - for using '\n' for newline
 # -n - don't add newline in the end
 echo -ne "$result" > "$file"
+

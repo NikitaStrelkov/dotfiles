@@ -43,9 +43,10 @@ Thumbs.db
 *~
 
 # Bitrix core folders
-/bitrix/
-/upload/
-/_log/
+_log
 
 # Ansible
 *.retry
+
+# php-cs-fixer cache 
+.php_cs.cache

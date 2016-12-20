@@ -49,7 +49,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man vagrant docker)
+plugins=(git colored-man vagrant docker cp tmux node nvm npm)
 
 # User configuration
 
@@ -96,3 +96,8 @@ setopt interactivecomments
 
 # # Zsh has a spelling corrector
 setopt CORRECT
+
+# Include aliases
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
+fi
