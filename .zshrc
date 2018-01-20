@@ -65,7 +65,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='mvim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -101,3 +101,5 @@ setopt CORRECT
 if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
+
+export PATH=$PATH:/usr/local/go/bin

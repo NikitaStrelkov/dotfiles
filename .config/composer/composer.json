@@ -1,0 +1,10 @@
+{
+    "require": {
+        "squizlabs/php_codesniffer": "*",
+        "phpmd/phpmd": "^2.4",
+        "friendsofphp/php-cs-fixer": "^2.4",
+	"mamuz/php-dependency-analysis": "^1.2",
+        "phpunit/phpunit": "^5.5",
+        "sebastian/phpcpd": "*"
+    }
+}
